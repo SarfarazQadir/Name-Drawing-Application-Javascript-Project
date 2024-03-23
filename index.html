@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Drawing Application</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #canvas-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body class="bg-light">
+  
+    <h1 class="text-center mt-5">Name Drawing Application</h1>
+    <form id="drawingForm" class="mt-5 mx-auto w-50">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name" required class="form-control mb-3">
+        
+        <label for="fontStyle" class="form-label">Font Style:</label>
+        <select id="fontStyle" name="fontStyle" class="form-select mb-3">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+        
+        <label for="color" class="form-label">Color:</label>
+        <input type="color" id="color" name="color" value="#000000" class="form-control mb-3">
+        
+        <button type="submit" class="btn btn-primary">Draw Name</button>
+    </form>
+    
+    <div id="canvas-container" class="mt-5">
+        <canvas id="drawingCanvas" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+        document.getElementById('drawingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            drawName();
+        });
+
+        function drawName() {
+            const name = document.getElementById('name').value;
+            const fontStyle = document.getElementById('fontStyle').value;
+            const color = document.getElementById('color').value;
+            const canvas = document.getElementById('drawingCanvas');
+            const context = canvas.getContext('2d');
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            
+            context.font = '30px ' + fontStyle;
+            context.fillStyle = color;
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            
+            const x = canvas.width / 2;
+            const y = canvas.height / 2;
+            context.fillText(name, x, y);
+        }
+    </script>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
